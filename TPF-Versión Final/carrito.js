@@ -3,7 +3,7 @@ let btnAgregarAlCarrito = document.getElementsByClassName("btn-primary")
 let containerCarrito = document.getElementsByTagName("tbody")[0]
 let espacioCantidad = document.getElementsByClassName("num")
 let btnBorrar = document.getElementsByClassName("uk-button-danger")
-let btnComprar = document.getElementsByClassName("uk-button-danger-danger")
+let btnComprar = document.getElementsByClassName("boton-compra")
 
 
 //Para tomar todos los botones "Agregar"
@@ -21,7 +21,7 @@ let btnComprar = document.getElementsByClassName("uk-button-danger-danger")
         let precioProducto = btnPadre.children[1].innerText
         let imgProducto = btnAbuelo.children[0].src
         let containerProducto = document.createElement("tr")
-
+        containerProducto.classList.add('producto-agregado')
         containerProducto.innerHTML = 
             `<td><img class ="uk-preserve-width uk-border-circle" src="${imgProducto}" width="40" alt=""></td>
             <td class="uk-table-link">
@@ -30,8 +30,7 @@ let btnComprar = document.getElementsByClassName("uk-button-danger-danger")
             <td class="uk-text-truncate item-price"><h3>${precioProducto}</h3></td>
             <td><input type = 'number' class = 'num' value = '1'></td>
             <td class="uk-text-truncate total-price"><h3>${precioProducto}</h3></td>
-            <td><button class="uk-button uk-button-danger" type="button">Borrar</button></td>
-            <td><button class="uk-button uk-button-danger-danger" type="button">Comprar</button></td>`
+            <td><button class="uk-button uk-button-danger" type="button">Borrar</button></td>`
 
         containerCarrito.append(containerProducto)    
         
@@ -94,10 +93,10 @@ let btnComprar = document.getElementsByClassName("uk-button-danger-danger")
     }
 
 //Funcion para borrar productos comprados del HMTL
-    function comprarProducto(event){
-        comBtn = event.target
-        comBtnAbuelo = comBtn.parentElement.parentElement
-        comBtnAbuelo.remove()
+    function comprarProducto(){
+        Array.from(document.getElementsByClassName('producto-agregado')).forEach(producto => {
+          producto.remove()
+        })
         totalFinal()
     }
 
